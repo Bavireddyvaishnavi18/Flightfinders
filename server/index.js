@@ -10,7 +10,11 @@ const app = express();
 app.use(express.json());
 app.use(bodyParser.json({limit: "30mb", extended: true}))
 app.use(bodyParser.urlencoded({limit: "30mb", extended: true}));
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
+
 
 // mongoose setup
 
@@ -271,6 +275,9 @@ mongoose.connect('mongodb://localhost:27017/FlightBookingMERN', {
 
 
 
+app.get('/api/test', (req, res) => {
+  res.send("Hello from backend!");
+});
 
         app.listen(PORT, ()=>{
             console.log(`Running @ ${PORT}`);
